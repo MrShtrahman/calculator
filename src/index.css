@@ -1,0 +1,14 @@
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 40px;
+  background: #26a69a;
+}
+
+ol, ul {
+  padding-left: 30px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
