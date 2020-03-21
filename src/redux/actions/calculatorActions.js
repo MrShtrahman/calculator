@@ -19,18 +19,6 @@ export const setDisplay = payload => {
         payload: payload
     }
 }
-export const setLeft = payload => {
-    return {
-        type: actionTypes.SET_LEFT,
-        payload: payload
-    }
-}
-export const setRight = payload => {
-    return {
-        type: actionTypes.SET_RIGHT,
-        payload: payload
-    }
-}
 export const setOperator = payload => {
     return {
         type: actionTypes.SET_OPERATOR,

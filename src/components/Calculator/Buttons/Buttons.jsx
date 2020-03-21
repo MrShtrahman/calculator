@@ -1,7 +1,7 @@
 import './Buttons.css';
 
-import React, { useCallback, useEffect, useState } from 'react';
-import { clear, setDisplay, setLeft, setOperator, setRight } from '../../../redux/actions/calculatorActions.js';
+import React, { useEffect, useState } from 'react';
+import { clear, setDisplay, setOperator } from '../../../redux/actions/calculatorActions.js';
 import { useDispatch, useSelector } from 'react-redux';
 
 import CalcButton from './CalcButton/CalcButton';
@@ -13,8 +13,11 @@ const values = [
     ['C', 0, '=', '/']
 ]
 const Buttons = () => {    
+    const [left, setLeft] = useState(0);
+    const [right, setRight] = useState(0);
     const [isLeft, setIsLeft] = useState(true);
     const [wasOperatorClicked, setWasOperatorClicked] = useState(false);
+    const [wasEqualClicked, setWasEqualClicked] = useState(false);
 
     const dispatch = useDispatch();
     const calculatorData = useSelector(state => state.calculatorReducer);
@@ -22,59 +25,70 @@ const Buttons = () => {
     const handleNumberClicked = value => {
         if(value === 0 && calculatorData.display === '') {
             dispatch(setDisplay('0.'))
-            isLeft ? dispatch(setLeft(0.)) : dispatch(setRight(0.))
+            isLeft ? setLeft(0.) : setRight(0.)
         } else {
             if(wasOperatorClicked) {
                 dispatch(setDisplay(value + ''))
-                isLeft ? dispatch(setLeft(value)) : dispatch(setRight(value))
+                isLeft ? setLeft(value) : setRight(value)
                 setWasOperatorClicked(false)
                 setIsLeft(false)
             } else {
                 dispatch(setDisplay(calculatorData.display + value + '')) 
-                isLeft ? dispatch(setLeft(Number(calculatorData.display + value +''))) : 
-                    dispatch(setRight(Number(calculatorData.display + value +'')))
+                isLeft ? setLeft(Number(calculatorData.display + value +'')) : 
+                    setRight(Number(calculatorData.display + value +''))
             }
         }
     }
 
     const handleClearClicked = () => {
+        setRight(0)
+        setLeft(0)
         setIsLeft(true)
         setWasOperatorClicked(false)
         dispatch(clear())
     }
 
+    const calculateResult = (left, right) => {
+        switch(calculatorData.operator) {
+            case '+':
+                return left + right;
+            case '-':
+                return left - right;
+            case '*':
+                return left * right;
+            case '/': 
+                if(right !== 0) {
+                    return left / right;
+                } else {
+                    dispatch(setDisplay("Can't divide by 0."))    
+                    setTimeout(() => dispatch(clear()), 750)
+                    return null
+                }
+            default: return
+        }
+    }
+
+    
     const handleOperatorClicked = value => {
-        setIsLeft(false)
-        setWasOperatorClicked(true)
         dispatch(setOperator(value))
+        setWasOperatorClicked(true)
+        setIsLeft(false)
+        if(calculatorData.operator !== null) {
+            if(wasEqualClicked) {
+                setWasEqualClicked(false)
+                setRight(0)
+            } else {
+                setLeft(calculateResult(left, right))
+                dispatch(setDisplay(calculateResult(left, right)))
+            }
+        }
     }
 
     const handleEqualClicked = () => {
-        const left = calculatorData.left;
-        const right = calculatorData.right;
-        let result;
-        switch(calculatorData.operator) {
-            case '+':
-                result = left + right;
-                break
-            case '-':
-                result = left - right;
-                break
-            case '*':
-                result = left * right;
-                break
-            case '/': 
-                if(right !== 0) {
-                    result = left / right;
-                } else {
-                    result = "Can't divide by 0."    
-                    setTimeout(() => dispatch(clear()), 750)   
-                }
-                break
-            default: return
-        }
+        setWasEqualClicked(true)
+        const result = calculateResult(left, right);
+        setLeft(result)
         dispatch(setDisplay(result))
-        dispatch(setLeft(result))
     }
 
     const clickHandler = value => {
@@ -107,6 +121,7 @@ const Buttons = () => {
             case 'Escape':
             case 'c':
             case 'C':
+            case 'Backspace':
                 handleClearClicked()
                 break
             case '+':
@@ -133,7 +148,6 @@ const Buttons = () => {
 
     useEffect(() => {
         window.addEventListener('keydown', handleKeyPress);
-        // Remove event listeners on cleanup
         return () => {
           window.removeEventListener('keydown', handleKeyPress);
         };

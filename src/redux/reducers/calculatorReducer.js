@@ -1,8 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    left: 0,
-    right: 0,
     display: '',
     memo: 0,
     operator: null
@@ -20,21 +18,9 @@ const calculatorReducer = (state = initialState, action) => {
                 ...state,
                 operator: action.payload
             }
-        case actionTypes.SET_LEFT: 
-            return {
-                ...state,
-                left: action.payload
-            }
-        case actionTypes.SET_RIGHT: 
-            return {
-                ...state,
-                right: action.payload
-            }
         case actionTypes.CLEAR: 
             return {
                 ...state,
-                left: 0,
-                right: 0,
                 display: '',
                 operator: null
             }        

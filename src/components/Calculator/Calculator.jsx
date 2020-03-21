@@ -4,8 +4,7 @@ import Buttons from './Buttons/Buttons';
 import React from 'react';
 import Result from './Result/Result';
 
-const Calculator = () => {
-    
+const Calculator = () => {  
     return (
         <Grid columns = {4} centered>
           <GridColumn>
