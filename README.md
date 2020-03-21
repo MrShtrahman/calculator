@@ -13,3 +13,4 @@ This is a very simple calculator, written only to kill spare time (while the Cor
 - Deal with decimal numbers
 - Show calculations history
 - Save history only for logged users
+- Integration + E2E tests
