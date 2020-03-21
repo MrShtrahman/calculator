@@ -1,8 +1,10 @@
+import calculatorReducer from './calculatorBasicReducer';
 import { combineReducers } from 'redux';
-import calculatorReducer from './calculatorReducer';
+import memoReducer from './memoReducer';
 
 const rootReducer = combineReducers({
-    calculatorReducer
+    calculatorReducer,
+    memoReducer
 })
 
 export default rootReducer;

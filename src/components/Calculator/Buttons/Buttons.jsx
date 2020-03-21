@@ -1,50 +1,50 @@
 import './Buttons.css';
 
 import React, { useEffect, useState } from 'react';
-import { clear, setDisplay, setOperator } from '../../../redux/actions/calculatorActions.js';
+import { addToMemo, resetMemo, subFromMemo } from '../../../redux/actions/memo';
+import { clear, setDisplay, setLeft, setOperator, setRight } from '../../../redux/actions/calculatorBasic.js';
 import { useDispatch, useSelector } from 'react-redux';
 
 import CalcButton from './CalcButton/CalcButton';
 
 const values = [
+    ['M+', 'M-', 'MR', 'MC'],
     [7, 8, 9, '+'],
     [4, 5, 6, '-'],
     [1, 2, 3, '*'],
     ['C', 0, '=', '/']
 ]
-const Buttons = () => {    
-    const [left, setLeft] = useState(0);
-    const [right, setRight] = useState(0);
+const Buttons = () => {
     const [isLeft, setIsLeft] = useState(true);
     const [wasOperatorClicked, setWasOperatorClicked] = useState(false);
     const [wasEqualClicked, setWasEqualClicked] = useState(false);
 
     const dispatch = useDispatch();
     const calculatorData = useSelector(state => state.calculatorReducer);
+    const memo = useSelector(state => state.memoReducer.memo)
 
     const handleNumberClicked = value => {
-        if(value === 0 && calculatorData.display === '') {
-            dispatch(setDisplay('0.'))
-            isLeft ? setLeft(0.) : setRight(0.)
-        } else {
+        if(value === 0 && (calculatorData.display === '0' || wasOperatorClicked)) {
+            isLeft ? dispatch(setLeft(0)) : dispatch(setRight(0))
+        } 
+        else {
             if(wasOperatorClicked) {
-                dispatch(setDisplay(value + ''))
-                isLeft ? setLeft(value) : setRight(value)
+                isLeft ? dispatch(setLeft(value)) : dispatch(setRight(value))
                 setWasOperatorClicked(false)
                 setIsLeft(false)
             } else {
-                dispatch(setDisplay(calculatorData.display + value + '')) 
-                isLeft ? setLeft(Number(calculatorData.display + value +'')) : 
-                    setRight(Number(calculatorData.display + value +''))
+                const curr = Number(calculatorData.display + value +'');
+                isLeft ? 
+                dispatch(setLeft(curr)) : 
+                dispatch(setRight(curr))
             }
         }
     }
 
     const handleClearClicked = () => {
-        setRight(0)
-        setLeft(0)
         setIsLeft(true)
         setWasOperatorClicked(false)
+        setWasEqualClicked(false)
         dispatch(clear())
     }
 
@@ -57,13 +57,7 @@ const Buttons = () => {
             case '*':
                 return left * right;
             case '/': 
-                if(right !== 0) {
-                    return left / right;
-                } else {
-                    dispatch(setDisplay("Can't divide by 0."))    
-                    setTimeout(() => dispatch(clear()), 750)
-                    return null
-                }
+                return right !== 0 ? left / right : Infinity
             default: return
         }
     }
@@ -76,19 +70,20 @@ const Buttons = () => {
         if(calculatorData.operator !== null) {
             if(wasEqualClicked) {
                 setWasEqualClicked(false)
-                setRight(0)
+                dispatch(setRight(0))
+                /* This is the only case in which the display doesn't 
+                   change along with calculatorData.right */
+                dispatch(setDisplay(calculatorData.left))
             } else {
-                setLeft(calculateResult(left, right))
-                dispatch(setDisplay(calculateResult(left, right)))
+                dispatch(setLeft(
+                    calculateResult(calculatorData.left, calculatorData.right)))
             }
         }
     }
 
     const handleEqualClicked = () => {
         setWasEqualClicked(true)
-        const result = calculateResult(left, right);
-        setLeft(result)
-        dispatch(setDisplay(result))
+        dispatch(setLeft(calculateResult(calculatorData.left, calculatorData.right)))
     }
 
     const clickHandler = value => {
@@ -107,6 +102,19 @@ const Buttons = () => {
                     break
                 case '=':
                     handleEqualClicked()
+                    break
+                case 'M+':
+                    dispatch(addToMemo(Number(calculatorData.display)))
+                    break
+                case 'M-':
+                    dispatch(subFromMemo(Number(calculatorData.display)))
+                    break
+                case 'MR':
+                    isLeft ? 
+                        dispatch(setLeft(memo)) : dispatch(setRight(memo))
+                    break
+                case 'MC':
+                    dispatch(resetMemo())
                     break
                 default: return
             }
