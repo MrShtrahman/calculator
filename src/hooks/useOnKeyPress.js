@@ -5,7 +5,7 @@ export const useOnKeyPress = () => {
     const {handleNumberClicked, handleOperatorClicked, 
         handleEqualClicked, handleClearClicked} = useEventHandler();
 
-    const doSomething = value => {
+    const keyPressHandler = value => {
         switch(value) {
             case 'Enter':
                 handleEqualClicked()
@@ -38,5 +38,5 @@ export const useOnKeyPress = () => {
         }
     }
 
-    return doSomething
+    return keyPressHandler
 }

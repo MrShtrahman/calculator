@@ -25,7 +25,7 @@ export const useOnClick = () => {
                 case 'M-':
                 case 'MR':
                 case 'MC':
-                    handleMemoryClicked()
+                    handleMemoryClicked(value)
                     break
                 default: return
             }
