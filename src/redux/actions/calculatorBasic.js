@@ -1,18 +1,5 @@
 import { calculatorBasic } from './actionTypes';
 
-export const setMemo = memo => {
-    return {
-        type: calculatorBasic.SET_MEMO,
-        payload: memo
-    }
-}
-
-export const resetMemo = () => {
-    return {
-        type: calculatorBasic.RESET_MEMO
-    }
-}
-
 export const setDisplay = payload => {
     return {
         type: calculatorBasic.SET_DISPLAY,

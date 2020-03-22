@@ -11,3 +11,9 @@ export const memo = {
     SUB_FROM_MEMO: 'SUB_FROM_MEMO',
     RESET_MEMO: 'RESET_MEMO'
 }
+
+export const calculatorMetadata = {
+    SET_OPERATOR_CLICKED: 'SET_OPERATOR_CLICKED',
+    SET_IS_LEFT: 'SET_IS_LEFT',
+    SET_EQUAL_CLICKED: 'SET_EQUAL_CLICKED'
+}

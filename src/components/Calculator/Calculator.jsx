@@ -1,27 +1,39 @@
 import { Card, CardContent, Grid, GridColumn } from 'semantic-ui-react';
+import React, { useCallback, useEffect } from 'react';
 
 import Buttons from './Buttons/Buttons';
-import React from 'react';
+import Memory from './Memory/Memory';
 import Result from './Result/Result';
-import { useSelector } from 'react-redux';
+import { useOnKeyPress } from '../../hooks/useOnKeyPress';
 
-const Calculator = () => {  
+const Calculator = () => {
+  
+  const onKeyPress = useOnKeyPress();  
+  const keyDownHandler = useCallback(event => {
+      const { key } = event;
+      onKeyPress(key)
+  }, [onKeyPress])
 
-  const isMemoShown = useSelector(state => state.memoReducer.isMemoIndication)
+  useEffect(() => {
+    window.addEventListener('keydown', keyDownHandler);
+    return () => {
+        window.removeEventListener('keydown',keyDownHandler);
+    };
+  }, [keyDownHandler]);
 
-    return (
-        <Grid columns = {4} centered>
-          <GridColumn>
-            <Card>
-            <CardContent header='Calculator A-la Shtrahman' />
-            <CardContent content = {isMemoShown ? 'M' : ''}  />
-            <Result />
-            <br/>
-            <Buttons />
-            </Card>        
-          </GridColumn>
-        </Grid>
-      )
+  return (
+      <Grid columns = {4} centered>
+        <GridColumn>
+          <Card>
+          <CardContent header='Calculator A-la Shtrahman' />
+          <Memory />
+          <Result />
+          <br/>
+          <Buttons />
+          </Card>        
+        </GridColumn>
+      </Grid>
+    )
 }
 
 export default Calculator;

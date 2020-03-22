@@ -4,7 +4,7 @@ import React from 'react';
 import { useSelector } from 'react-redux'
 
 const Result = () => {
-  const display = useSelector(state => state.calculatorReducer.display)
+  const display = useSelector(state => state.calculatorBasicReducer.display)
     return (
       <Form>
         <FormInput fluid readOnly value = {display}/>

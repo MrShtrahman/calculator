@@ -3,6 +3,7 @@ import Interface from './hoc/Interface';
 import React from 'react';
 
 const App = () => {
+
   return (
     <Calculator />
   )

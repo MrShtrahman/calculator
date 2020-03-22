@@ -12,19 +12,18 @@ const chooseColor = value => {
     }
 }
 
-const CalcButton = ({value, clicked}) => {
-    return <Button 
-        value = {value} 
-        size = 'large' 
-        active = {false}
-        inverted 
-        style = {{
-            height: '65px',
-            width: '65px'
-        }}
-        color = {chooseColor(value)} 
-        onClick = {clicked} 
-        content = {value}>
-    </Button>
-}
+const CalcButton = ({value, clicked}) => <Button 
+    value = {value} 
+    size = 'large' 
+    active = {false}
+    inverted 
+    style = {{
+        height: '65px',
+        width: '65px'
+    }}
+    color = {chooseColor(value)} 
+    onClick = {clicked} 
+    content = {value}>
+</Button>
+
 export default CalcButton
