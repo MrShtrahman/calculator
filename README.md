@@ -1,3 +1,5 @@
+![Calc_image](./assets/Calc.PNG)
+
 This is a very simple calculator, written only to kill spare time (while the Corona virus is having the time of its life)...
 
 ## Written with:
