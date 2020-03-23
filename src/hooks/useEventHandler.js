@@ -30,19 +30,14 @@ export const useEventHandler = () => {
 
     //#region specificClickHandlers
     const handleNumberClicked = value => {
-        if(value === 0 && 
-            (calculatorData.display === '0' || metadata.operatorClicked)) {
-            setRelevantOperandTo(0)
+        if(metadata.operatorClicked) {
+            setRelevantOperandTo(value)
+            batch(() => {
+                dispatch(setOperatorClicked(false))
+                dispatch(setIsLeft(false))
+            })
         } else {
-            if(metadata.operatorClicked) {
-                batch(() => {
-                    dispatch(setRelevantOperandTo(value))
-                    dispatch(setOperatorClicked(false))
-                    dispatch(setIsLeft(false))
-                })
-            } else {
-                setRelevantOperandTo(Number(calculatorData.display + value +''))
-            }
+            setRelevantOperandTo(Number(calculatorData.display + value +''))
         }
     }
 
