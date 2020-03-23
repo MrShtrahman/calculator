@@ -4,6 +4,17 @@ import CalcButton from './CalcButton/CalcButton';
 import React from 'react';
 import { useOnClick } from '../../../hooks/useOnClick'
 
+const chooseColor = value => {
+    if(!isNaN(value)) return 'blue'
+    else {
+        switch(value) {
+            case 'C':
+                return 'red'
+            default: return 'purple'
+        }
+    }
+}
+
 const Buttons = () => {        
     const onClick = useOnClick();
     
@@ -20,6 +31,7 @@ const Buttons = () => {
             <div className = 'buttonsRow' key = {index}>
                 {row.map(value => 
                     <CalcButton key = {value} value = {value} 
+                    color = {chooseColor(value)}
                     clicked = {() => onClick(value)}/>)}
             </div>)
     )

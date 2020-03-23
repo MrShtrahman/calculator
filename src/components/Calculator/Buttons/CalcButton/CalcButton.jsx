@@ -1,18 +1,7 @@
 import { Button } from 'semantic-ui-react';
 import React from 'react';
 
-const chooseColor = value => {
-    if(!isNaN(value)) return 'blue'
-    else {
-        switch(value) {
-            case 'C':
-                return 'red'
-            default: return 'purple'
-        }
-    }
-}
-
-const CalcButton = ({value, clicked}) => <Button 
+const CalcButton = ({value, clicked, color}) => <Button 
     value = {value} 
     size = 'large' 
     active = {false}
@@ -21,7 +10,7 @@ const CalcButton = ({value, clicked}) => <Button
         height: '65px',
         width: '65px'
     }}
-    color = {chooseColor(value)} 
+    color = {color} 
     onClick = {clicked} 
     content = {value}>
 </Button>

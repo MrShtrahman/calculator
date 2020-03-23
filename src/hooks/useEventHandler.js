@@ -71,12 +71,11 @@ export const useEventHandler = () => {
         }
     }
 
-    const handleEqualClicked = () => {
-        batch(() => {
+    const handleEqualClicked = () => batch(() => {
             dispatch(setEqualClicked(true))
             dispatch(setLeft(calculateResult(calculatorData.left, calculatorData.right)))
         })
-    }
+    
 
     const handleMemoryClicked = value => {
         switch(value) {
