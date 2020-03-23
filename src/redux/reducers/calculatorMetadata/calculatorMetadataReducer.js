@@ -1,4 +1,4 @@
-import { calculatorMetadata } from '../actions/actionTypes'
+import { calculatorMetadata } from '../../actions/actionTypes'
 
 const initialState = {
     isLeft: true,

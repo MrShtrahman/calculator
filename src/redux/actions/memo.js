@@ -12,9 +12,8 @@ export const subFromMemo = payload => {
         payload: payload
     }
 }
-export const resetMemo = payload => {
+export const resetMemo = () => {
     return {
-        type: memo.RESET_MEMO,
-        payload: payload
+        type: memo.RESET_MEMO
     }
 }

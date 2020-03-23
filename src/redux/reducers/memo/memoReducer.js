@@ -1,8 +1,8 @@
-import { memo } from '../actions/actionTypes';
+import { memo } from '../../actions/actionTypes';
 
 const initialState = {
     memo: 0,
-    isMemoIndication: false
+    isMemoShown: false
 }
 
 const memoReducer = (state = initialState, action) => {
@@ -10,18 +10,15 @@ const memoReducer = (state = initialState, action) => {
         case memo.ADD_TO_MEMO: 
             return {
                 memo: state.memo + action.payload,
-                isMemoIndication: true
+                isMemoShown: true
             }
         case memo.SUB_FROM_MEMO: 
             return {
                 memo: state.memo - action.payload,
-                isMemoIndication: true
+                isMemoShown: true
             }
         case memo.RESET_MEMO: 
-            return {
-                memo: 0,
-                isMemoIndication: false
-            }
+            return initialState
         default: return state
     }
 }

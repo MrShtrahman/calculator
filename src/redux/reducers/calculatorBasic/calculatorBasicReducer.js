@@ -1,4 +1,4 @@
-import { calculatorBasic } from '../actions/actionTypes';
+import { calculatorBasic } from '../../actions/actionTypes';
 
 const initialState = {
     display: '0',
