@@ -2,8 +2,11 @@ import './Buttons.css';
 
 import CalcButton from './CalcButton/CalcButton';
 import React from 'react';
+import { useOnClick } from '../../../hooks/useOnClick'
 
-const Buttons = () => {
+const Buttons = () => {        
+    const onClick = useOnClick();
+    
     const values = [
         ['M+', 'M-', 'MR', 'MC'],
         [7, 8, 9, '+'],
@@ -16,7 +19,8 @@ const Buttons = () => {
         values.map((row, index) => 
             <div className = 'buttonsRow' key = {index}>
                 {row.map(value => 
-                    <CalcButton key = {value} value = {value} />)}
+                    <CalcButton key = {value} value = {value} 
+                    clicked = {() => onClick(value)}/>)}
             </div>)
     )
 }
