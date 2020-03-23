@@ -1,6 +1,6 @@
 import { Button } from 'semantic-ui-react';
 import React from 'react';
-
+import { useOnClick } from '../../../../hooks/useOnClick';
 const chooseColor = value => {
     if(!isNaN(value)) return 'blue'
     else {
@@ -12,18 +12,21 @@ const chooseColor = value => {
     }
 }
 
-const CalcButton = ({value, clicked}) => <Button 
-    value = {value} 
-    size = 'large' 
-    active = {false}
-    inverted 
-    style = {{
-        height: '65px',
-        width: '65px'
-    }}
-    color = {chooseColor(value)} 
-    onClick = {clicked} 
-    content = {value}>
-</Button>
+const CalcButton = ({value}) => {
+    const onClick = useOnClick();
+    return <Button 
+        value = {value} 
+        size = 'large' 
+        active = {false}
+        inverted 
+        style = {{
+            height: '65px',
+            width: '65px'
+        }}
+        color = {chooseColor(value)} 
+        onClick = {() => onClick(value)} 
+        content = {value}>
+    </Button>
+}
 
 export default CalcButton
