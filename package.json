@@ -11,7 +11,8 @@
     "react-dom": "^16.12.0",
     "react-scripts": "^3.4.0",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.88.2"
+    "semantic-ui-react": "^0.88.2",
+    "typescript": "^3.8.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,12 +36,12 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/react-hooks": "^3.2.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "expect": "^25.1.0",
     "jest-environment-enzyme": "^7.1.2",
     "jest-enzyme": "^7.1.2",
+    "react-hooks-testing-library": "^0.6.0",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-mock-store": "^1.5.4",
