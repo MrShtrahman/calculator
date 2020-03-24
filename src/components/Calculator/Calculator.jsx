@@ -27,7 +27,7 @@ const Calculator = () => {
     <Grid columns={4} centered>
       <GridColumn>
         <Card>
-          <CardContent header=" chtok chtok ya omo" />
+          <CardContent header="Calculator A-la Shtrahman" />
           <Memory />
           <Result />
           <br />
@@ -39,4 +39,3 @@ const Calculator = () => {
 };
 
 export default Calculator;
-////Calculator A-la Shtrahman
