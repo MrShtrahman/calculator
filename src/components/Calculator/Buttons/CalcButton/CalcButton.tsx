@@ -1,18 +1,16 @@
 import { Button } from "semantic-ui-react";
+import { CalcButtonType } from "./CalcButtonType";
 import React from "react";
 
-const CalcButton = ({ value, clicked, color }) => (
+const CalcButton = ({ value, onClick, style, color, size }: CalcButtonType) => (
   <Button
-    value={value}
-    size="large"
-    active={false}
     inverted
-    style={{
-      height: "65px",
-      width: "65px"
-    }}
+    value={value}
+    size={size}
+    active={false}
+    style={style}
     color={color}
-    onClick={clicked}
+    onClick={onClick}
     content={value}
     data-testid={value}
   ></Button>
