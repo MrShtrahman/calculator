@@ -1,28 +1,10 @@
-import { configure, mount } from "enzyme";
-
-import Adapter from "enzyme-adapter-react-16";
-import { Provider } from "react-redux";
 import React from "react";
 import Result from "./Result";
-import { createStore } from "redux";
-import expect from "expect";
-import reducer from "../../../redux/reducers/calculatorBasic/calculatorBasicReducer";
+import { mountWithRedux } from "../../../redux/testUtils";
 
-configure({
-  adapter: new Adapter()
-});
-
-describe("<Memory /> component", () => {
-  const mockStore = createStore(reducer, {
-    calculatorBasicReducer: {}
-  });
-
+describe("<Result /> component", () => {
   it("renders", () => {
-    const wrapper = mount(
-      <Provider store={mockStore}>
-        <Result />
-      </Provider>
-    );
+    const wrapper = mountWithRedux(<Result />);
 
     expect(wrapper).toMatchSnapshot();
   });
