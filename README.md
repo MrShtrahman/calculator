@@ -10,9 +10,3 @@ This is a very simple calculator, written only to kill spare time (while the Cor
 - [Jest](https://jestjs.io)
 - [Enzyme](https://enzymejs.github.io/enzyme/)
 - [@testing-library](https://testing-library.com) libraries
-
-### Still to do (Feel free to add requests):
-- Deal with decimal numbers
-- Show calculations history
-- Save history only for logged users
-- Integration + E2E tests
