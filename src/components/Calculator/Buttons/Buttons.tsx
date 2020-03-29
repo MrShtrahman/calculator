@@ -1,7 +1,9 @@
-import React, { ReactText } from "react";
-import { isNumber } from "util";
 import "./Buttons.css";
+
+import React, { FC, Fragment, ReactText } from "react";
+
 import CalcButton from "./CalcButton/CalcButton";
+import { isNumber } from "util";
 import { useOnClick } from "../../../hooks/useOnClick";
 
 const chooseColor = (value: ReactText) => {
@@ -16,7 +18,7 @@ const chooseColor = (value: ReactText) => {
   }
 };
 
-const Buttons = () => {
+const Buttons: FC = () => {
   const onClick = useOnClick();
   const values = [
     ["M+", "M-", "MR", "MC"],
@@ -26,23 +28,27 @@ const Buttons = () => {
     ["C", 0, "=", "/"]
   ];
 
-  return values.map((row, index) => (
-    <div className="buttonsRow" key={index}>
-      {row.map(value => (
-        <CalcButton
-          key={value}
-          value={value}
-          color={chooseColor(value)}
-          onClick={() => onClick(value)}
-          style={{
-            height: "65px",
-            width: "65px"
-          }}
-          size={"large"}
-        />
+  return (
+    <Fragment>
+      {values.map((row, index) => (
+        <div className="buttonsRow" key={index}>
+          {row.map(value => (
+            <CalcButton
+              key={value}
+              value={value}
+              color={chooseColor(value)}
+              onClick={() => onClick(value)}
+              style={{
+                height: "65px",
+                width: "65px"
+              }}
+              size={"large"}
+            />
+          ))}
+        </div>
       ))}
-    </div>
-  ));
+    </Fragment>
+  );
 };
 
 export default Buttons;

@@ -1,8 +1,15 @@
+import React, { FC } from "react";
+
 import { Button } from "semantic-ui-react";
 import { CalcButtonType } from "./CalcButtonType";
-import React from "react";
 
-const CalcButton = ({ value, onClick, style, color, size }: CalcButtonType) => (
+const CalcButton: FC<CalcButtonType> = ({
+  value,
+  onClick,
+  style,
+  color,
+  size
+}) => (
   <Button
     inverted
     value={value}

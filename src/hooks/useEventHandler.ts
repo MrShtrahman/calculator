@@ -1,5 +1,5 @@
 import { addToMemo, resetMemo, subFromMemo } from "../redux/actions/memo";
-import { batch, useDispatch, useSelector } from "react-redux";
+import { batch, useDispatch } from "react-redux";
 import {
   clear,
   setDisplay,
@@ -13,17 +13,19 @@ import {
   setOperatorClicked
 } from "../redux/actions/calculatorMetadata";
 
+import { useSelector } from "../redux/useSelector";
+
 export const useEventHandler = () => {
   const dispatch = useDispatch();
-  const calculatorData = useSelector(state => state.calculatorBasicReducer);
-  const memo = useSelector(state => state.memoReducer.memo);
-  const metadata = useSelector(state => state.calculatorMetadataReducer);
+  const calculatorData = useSelector(state => state.calcBasic);
+  const memo = useSelector(state => state.memo.memo);
+  const metadata = useSelector(state => state.calcMetadata);
 
   //#region utils
-  const setRelevantOperandTo = value =>
+  const setRelevantOperandTo = (value: number) =>
     metadata.isLeft ? dispatch(setLeft(value)) : dispatch(setRight(value));
 
-  const calculateResult = (left, right) => {
+  const calculateResult = (left: number, right: number): number => {
     switch (calculatorData.operator) {
       case "+":
         return left + right;
@@ -34,14 +36,13 @@ export const useEventHandler = () => {
       case "/":
         return right !== 0 ? left / right : Infinity;
       default:
-        return;
-      //#region specificClickHandlers
+        return 0;
     }
   };
   //#endregion
 
   //#region specificClickHandlers
-  const handleNumberClicked = value => {
+  const handleNumberClicked = (value: number) => {
     if (metadata.operatorClicked) {
       setRelevantOperandTo(value);
       batch(() => {
@@ -58,16 +59,16 @@ export const useEventHandler = () => {
       dispatch(setIsLeft(true));
       dispatch(setOperatorClicked(false));
       dispatch(setEqualClicked(false));
-      dispatch(clear());
+      dispatch(clear(""));
     });
 
-  const handleOperatorClicked = value => {
+  const handleOperatorClicked = (value: string) => {
     batch(() => {
       dispatch(setOperator(value));
       dispatch(setOperatorClicked(true));
       dispatch(setIsLeft(false));
     });
-    if (calculatorData.operator !== null) {
+    if (calculatorData.operator !== "") {
       if (metadata.equalClicked) {
         batch(() => {
           dispatch(setEqualClicked(false));
@@ -92,7 +93,7 @@ export const useEventHandler = () => {
       );
     });
 
-  const handleMemoryClicked = value => {
+  const handleMemoryClicked = (value: string) => {
     switch (value) {
       case "M+":
         dispatch(addToMemo(Number(calculatorData.display)));

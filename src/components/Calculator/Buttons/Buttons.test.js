@@ -1,5 +1,6 @@
 import Buttons from "./Buttons";
 import React from "react";
+import expect from "expect";
 import { mountWithRedux } from "../../../redux/testUtils";
 
 describe("<Buttons /> component", () => {
