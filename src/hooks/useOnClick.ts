@@ -9,7 +9,7 @@ export const useOnClick = () => {
     handleMemoryClicked
   } = useEventHandler();
 
-  const clickHandler = value => {
+  const clickHandler = (value: any) => {
     if (!isNaN(value)) {
       handleNumberClicked(value);
     } else {

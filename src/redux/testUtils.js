@@ -20,12 +20,13 @@ const initialState = {
     left: 0,
     right: 0,
     display: "0",
-    operator: null
+    operator: ""
   },
   calculatorMetadataReducer: {
     isLeft: true,
     equalClicked: false,
-    operatorClicked: false
+    operatorClicked: false,
+    history: ""
   }
 };
 

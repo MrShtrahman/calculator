@@ -36,16 +36,20 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^3.2.1",
+    "@types/enzyme": "^3.10.5",
+    "@types/jest": "^25.1.4",
+    "@types/react-redux": "^7.1.7",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "expect": "^25.1.0",
     "jest-environment-enzyme": "^7.1.2",
     "jest-enzyme": "^7.1.2",
-    "@testing-library/react-hooks": "^3.2.1",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-mock-store": "^1.5.4",
     "redux-observable": "^1.2.0",
-    "rxjs": "^6.5.4"
+    "rxjs": "^6.5.4",
+    "typesafe-actions": "^5.1.0"
   }
 }

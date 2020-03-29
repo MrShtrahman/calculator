@@ -4,7 +4,8 @@ import { mountWithRedux } from "../../../redux/testUtils";
 
 describe("<Result /> component", () => {
   it("renders", () => {
-    const wrapper = mountWithRedux(<Result />);
+    const mockDisplay = "1234";
+    const wrapper = mountWithRedux(<Result display={mockDisplay} />);
 
     expect(wrapper).toMatchSnapshot();
   });

@@ -8,7 +8,7 @@ export const useOnKeyPress = () => {
     handleClearClicked
   } = useEventHandler();
 
-  const keyPressHandler = value => {
+  const keyPressHandler = (value: any) => {
     switch (value) {
       case "Enter":
         handleEqualClicked();
