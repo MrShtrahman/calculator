@@ -1,7 +1,7 @@
 import { calculatorBasic as actionTypes } from "./actionTypes";
 import { createAction } from "typesafe-actions";
 
-export const setDisplay = createAction(actionTypes.SET_LEFT)<number>();
+export const setDisplay = createAction(actionTypes.SET_DISPLAY)<number>();
 
 export const setRight = createAction(actionTypes.SET_RIGHT)<number>();
 

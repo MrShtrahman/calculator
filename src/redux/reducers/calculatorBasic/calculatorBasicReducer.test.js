@@ -1,13 +1,13 @@
 import * as actions from '../../actions/calculatorBasic';
 
 import expect from 'expect';
-import reducer from './calculatorBasicReducer';
+import { calculatorBasicReducer as reducer } from './calculatorBasicReducer';
 
 const initialState = {
     display: '0',
     left: 0,
     right: 0,
-    operator: null
+    operator: ""
 }
 
 describe('calculatorBasic reducer', () => {

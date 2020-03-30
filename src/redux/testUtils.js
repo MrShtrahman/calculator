@@ -12,17 +12,17 @@ configure({
 });
 
 const initialState = {
-  memoReducer: {
+  memo: {
     memo: 0,
     isMemoShown: false
   },
-  calculatorBasicReducer: {
+  calcBasic: {
     left: 0,
     right: 0,
     display: "0",
     operator: ""
   },
-  calculatorMetadataReducer: {
+  calcMetadata: {
     isLeft: true,
     equalClicked: false,
     operatorClicked: false,

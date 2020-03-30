@@ -29,7 +29,7 @@ export const memoReducer = (
         memo: state.memo - Number(action.payload),
         isMemoShown: true
       };
-    case getType(actions.resetMemo()):
+    case getType(actions.resetMemo):
       return initialState;
     default:
       return state;
