@@ -1,7 +1,7 @@
 import * as actions from '../../actions/memo';
 
 import expect from 'expect';
-import reducer from './memoReducer';
+import { memoReducer as reducer } from './memoReducer';
 
 const initialState = {
     memo: 0,

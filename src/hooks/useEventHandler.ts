@@ -105,7 +105,7 @@ export const useEventHandler = () => {
         setRelevantOperandTo(memo);
         break;
       case "MC":
-        dispatch(resetMemo());
+        dispatch(resetMemo(""));
         break;
       default:
         return;

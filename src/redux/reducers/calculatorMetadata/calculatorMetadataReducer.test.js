@@ -1,10 +1,11 @@
 import * as actions from '../../actions/calculatorMetadata';
 
 import expect from 'expect';
-import reducer from './calculatorMetadataReducer';
+import { calculatorMetadataReducer as reducer } from './calculatorMetadataReducer';
 
 const initialState = {
     isLeft: true,
+    history: "",
     equalClicked: false,
     operatorClicked: false
 }
