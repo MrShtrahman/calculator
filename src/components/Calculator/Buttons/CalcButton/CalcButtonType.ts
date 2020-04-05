@@ -1,5 +1,7 @@
-import { SemanticSIZES, SemanticCOLORS } from "semantic-ui-react";
-import { ReactText /*MouseEvent, SyntheticEvent*/ } from "react";
+import { SemanticCOLORS, SemanticSIZES } from "semantic-ui-react";
+
+import { ReactText } from "react";
+
 export type CalcButtonType = {
   value: ReactText;
   onClick: () => void;

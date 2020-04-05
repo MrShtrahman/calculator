@@ -1,10 +1,8 @@
 import React, { FC } from "react";
 
-import Calculator from "./components/Calculator/Calculator";
 import Interface from "./hoc/Interface";
+import Routes from "./components/Routes";
 
-const App: FC = () => {
-  return <Calculator />;
-};
+const App: FC = () => <Routes />;
 
 export default Interface(App);
