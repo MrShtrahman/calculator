@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "name": "Matan Shtrahman",
+      "id": 1
+    },
+    {
+      "name": "Itai Klapholtz",
+      "id": 2
+    },
+    {
+      "name": "Assaf Aharon",
+      "id": 3
+    },
+    {
+      "name": "Tomer Ben Haim",
+      "id": 24
+    }
+  ]
+}
