@@ -7,7 +7,9 @@ const LinkButtons: FC = () => (
   <Segment>
     <Grid>
       <Grid.Column textAlign="center">
-        <LinkButton to="/calculator">Go to calculator</LinkButton>
+        <LinkButton to="/calculator" color="green">
+          Go to calculator
+        </LinkButton>
       </Grid.Column>
     </Grid>
   </Segment>

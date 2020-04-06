@@ -1,12 +1,14 @@
+import { Button, SemanticCOLORS, SemanticSIZES } from "semantic-ui-react";
 import React, { FC, MouseEvent } from "react";
 
-import { Button } from "semantic-ui-react";
 import { RouteComponentProps } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 
 type LinkButtonProps = {
   to: string;
   onClick?: any;
+  color?: SemanticCOLORS;
+  size?: SemanticSIZES;
 };
 
 const LinkButton: FC<RouteComponentProps & LinkButtonProps> = ({
@@ -16,12 +18,14 @@ const LinkButton: FC<RouteComponentProps & LinkButtonProps> = ({
   onClick,
   match,
   staticContext,
+  color,
+  size,
   ...rest
 }) => (
   <Button
     {...rest}
-    color="green"
-    size="large"
+    color={color || "grey"}
+    size={size || "large"}
     onClick={(event: MouseEvent) => {
       onClick && onClick(event);
       history.push(to);
