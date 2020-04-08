@@ -2,23 +2,34 @@
   "users": [
     {
       "name": "Matan Shtrahman",
+      "username": "Matan",
+      "password": "Shtrahman",
       "id": 1
     },
     {
       "name": "Itai Klapholtz",
+      "username": "Itai",
+      "password": "Klaphotlz",
       "id": 2
     },
     {
       "name": "Assaf Aharon",
+      "username": "Assaf",
+      "password": "Aharon",
       "id": 3
     },
     {
       "name": "Tomer Ben Haim",
+      "username": "Tomer",
+      "password": "BenHaim",
       "id": 24
     },
     {
       "name": "Noam Tshuva",
+      "username": "Noam",
+      "password": "Tshuva",
       "id": -1
     }
   ]
 }
+
