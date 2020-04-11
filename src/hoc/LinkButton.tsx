@@ -9,6 +9,7 @@ type LinkButtonProps = {
   onClick?: any;
   color?: SemanticCOLORS;
   size?: SemanticSIZES;
+  disabled?: boolean;
 };
 
 const LinkButton: FC<RouteComponentProps & LinkButtonProps> = ({
@@ -20,10 +21,12 @@ const LinkButton: FC<RouteComponentProps & LinkButtonProps> = ({
   staticContext,
   color,
   size,
+  disabled,
   ...rest
 }) => (
   <Button
     {...rest}
+    disabled={disabled || false}
     color={color || "grey"}
     size={size || "large"}
     onClick={(event: MouseEvent) => {

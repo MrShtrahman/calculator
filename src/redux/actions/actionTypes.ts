@@ -3,13 +3,13 @@ export const calculatorBasic = {
   SET_OPERATOR: "SET_OPERATOR",
   SET_LEFT: "SET_LEFT",
   SET_RIGHT: "SET_RIGHT",
-  CLEAR: "CLEAR"
+  CLEAR: "CLEAR",
 };
 
 export const memo = {
   ADD_TO_MEMO: "ADD_TO_MEMO",
   SUB_FROM_MEMO: "SUB_FROM_MEMO",
-  RESET_MEMO: "RESET_MEMO"
+  RESET_MEMO: "RESET_MEMO",
 };
 
 export const calculatorMetadata = {
@@ -17,5 +17,10 @@ export const calculatorMetadata = {
   SET_IS_LEFT: "SET_IS_LEFT",
   SET_EQUAL_CLICKED: "SET_EQUAL_CLICKED",
   ADD_TO_HISTORY: "ADD_TO_HISTORY",
-  RESET_HISTORY: "RESET_HISTORY"
+  RESET_HISTORY: "RESET_HISTORY",
+};
+
+export const auth = {
+  SET_IS_AUTH: "SET_IS_AUTH",
+  SET_NAME: "SET_NAME",
 };

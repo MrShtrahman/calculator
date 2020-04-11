@@ -15,7 +15,7 @@ const initialState = {
   display: "0",
   left: 0,
   right: 0,
-  operator: ""
+  operator: "",
 };
 
 export const calculatorBasicReducer = (
@@ -24,14 +24,17 @@ export const calculatorBasicReducer = (
 ): CalcBasicState => {
   switch (action.type) {
     case getType(actions.setRight):
-      return { 
-        ...state, 
+      return {
+        ...state,
         right: Number(action.payload),
-        display: action.payload.toString() };
+        display: action.payload.toString(),
+      };
     case getType(actions.setLeft):
-      return { ...state, 
+      return {
+        ...state,
         left: Number(action.payload),
-        display: action.payload.toString() };
+        display: action.payload.toString(),
+      };
     case getType(actions.setDisplay):
       return { ...state, display: action.payload.toString() };
     case getType(actions.setOperator):
