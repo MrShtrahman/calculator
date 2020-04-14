@@ -5,7 +5,8 @@ export const useOnKeyPress = () => {
     handleNumberClicked,
     handleOperatorClicked,
     handleEqualClicked,
-    handleClearClicked
+    handleClearClicked,
+    handleDecimalPointClicked
   } = useEventHandler();
 
   const keyPressHandler = (value: any) => {
@@ -17,6 +18,7 @@ export const useOnKeyPress = () => {
       case "c":
       case "C":
       case "Backspace":
+      case "Delete":
         handleClearClicked();
         break;
       case "+":
@@ -35,7 +37,10 @@ export const useOnKeyPress = () => {
       case "7":
       case "8":
       case "9":
-        handleNumberClicked(Number(value));
+        handleNumberClicked(value);
+        break;
+      case ".":
+        handleDecimalPointClicked();
         break;
       default:
         return;

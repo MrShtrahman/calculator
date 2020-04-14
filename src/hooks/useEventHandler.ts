@@ -22,7 +22,7 @@ export const useEventHandler = () => {
   const metadata = useSelector(state => state.calcMetadata);
 
   //#region utils
-  const setRelevantOperandTo = (value: number) =>
+  const setRelevantOperandTo = (value: string) =>
     metadata.isLeft ? dispatch(setLeft(value)) : dispatch(setRight(value));
 
   const calculateResult = (left: number, right: number): number => {
@@ -42,7 +42,7 @@ export const useEventHandler = () => {
   //#endregion
 
   //#region specificClickHandlers
-  const handleNumberClicked = (value: number) => {
+  const handleNumberClicked = (value: string) => {
     if (metadata.operatorClicked) {
       setRelevantOperandTo(value);
       batch(() => {
@@ -50,7 +50,12 @@ export const useEventHandler = () => {
         dispatch(setIsLeft(false));
       });
     } else {
-      setRelevantOperandTo(Number(calculatorData.display + value + ""));
+        if (calculatorData.display === "0") {
+          setRelevantOperandTo(value)
+        }
+        else {
+          setRelevantOperandTo(calculatorData.display + value)
+        }
     }
   };
 
@@ -72,14 +77,14 @@ export const useEventHandler = () => {
       if (metadata.equalClicked) {
         batch(() => {
           dispatch(setEqualClicked(false));
-          dispatch(setRight(0));
+          dispatch(setRight("0"));
           /* This is the only case in which calculatorData.display doesn't 
                     change along with calculatorData.right */
           dispatch(setDisplay(calculatorData.left));
         });
       } else {
         dispatch(
-          setLeft(calculateResult(calculatorData.left, calculatorData.right))
+          setLeft(calculateResult(Number(calculatorData.left), Number(calculatorData.right)).toString())
         );
       }
     }
@@ -89,7 +94,7 @@ export const useEventHandler = () => {
     batch(() => {
       dispatch(setEqualClicked(true));
       dispatch(
-        setLeft(calculateResult(calculatorData.left, calculatorData.right))
+        setLeft(calculateResult(Number(calculatorData.left), Number(calculatorData.right)).toString())
       );
     });
 
@@ -102,13 +107,19 @@ export const useEventHandler = () => {
         dispatch(subFromMemo(Number(calculatorData.display)));
         break;
       case "MR":
-        setRelevantOperandTo(memo);
+        setRelevantOperandTo(memo.toString());
         break;
       case "MC":
         dispatch(resetMemo(""));
         break;
       default:
         return;
+    }
+  };
+
+  const handleDecimalPointClicked = () => {
+    if (!calculatorData.display.includes(".")) {
+      setRelevantOperandTo(calculatorData.display + ".")
     }
   };
   //#endregion
@@ -118,6 +129,7 @@ export const useEventHandler = () => {
     handleOperatorClicked,
     handleEqualClicked,
     handleClearClicked,
-    handleMemoryClicked
+    handleMemoryClicked,
+    handleDecimalPointClicked
   };
 };
