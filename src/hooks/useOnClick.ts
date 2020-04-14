@@ -6,11 +6,12 @@ export const useOnClick = () => {
     handleOperatorClicked,
     handleEqualClicked,
     handleClearClicked,
-    handleMemoryClicked
+    handleMemoryClicked,
+    handleDecimalPointClicked
   } = useEventHandler();
 
   const clickHandler = (value: any) => {
-    if (!isNaN(value)) {
+    if (value >= "0" && value <= "9") {
       handleNumberClicked(value);
     } else {
       switch (value) {
@@ -31,6 +32,9 @@ export const useOnClick = () => {
         case "MR":
         case "MC":
           handleMemoryClicked(value);
+          break;
+        case ".":
+          handleDecimalPointClicked();
           break;
         default:
           return;

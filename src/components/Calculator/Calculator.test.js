@@ -21,6 +21,12 @@ describe("Calculator", () => {
 
     expect(getByTestId("result-label")).toHaveTextContent("454");
 
+    // 12.5 + 21.6 = 34.1
+    const decPointValues = ["+", "2", "1", ".", "6", "="];
+    decPointValues.forEach(value => fireEvent.click(getByTestId(value)));
+    
+    expect(getByTestId("result-label")).toHaveTextContent("475.6");
+
     // back to square one
     fireEvent.click(getByTestId("C"));
 
