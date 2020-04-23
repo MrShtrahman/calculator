@@ -10,7 +10,8 @@ import {
 import {
   setEqualClicked,
   setIsLeft,
-  setOperatorClicked
+  setOperatorClicked,
+  addToHistory
 } from "../redux/actions/calculatorMetadata";
 
 import { useSelector } from "../redux/useSelector";
@@ -20,10 +21,17 @@ export const useEventHandler = () => {
   const calculatorData = useSelector(state => state.calcBasic);
   const memo = useSelector(state => state.memo.memo);
   const metadata = useSelector(state => state.calcMetadata);
+  const history = useSelector(state => state.calcMetadata.history);
 
   //#region utils
-  const setRelevantOperandTo = (value: string) =>
-    metadata.isLeft ? dispatch(setLeft(value)) : dispatch(setRight(value));
+  const setRelevantOperandTo = (value: string, manualIsLeftChoise?: boolean) => {
+    if (manualIsLeftChoise == undefined) {
+      metadata.isLeft ? dispatch(setLeft(value)) : dispatch(setRight(value));
+    }
+    else {
+      manualIsLeftChoise ? dispatch(setLeft(value)) : dispatch(setRight(value));
+    }
+  }
 
   const calculateResult = (left: number, right: number): number => {
     switch (calculatorData.operator) {
@@ -43,7 +51,11 @@ export const useEventHandler = () => {
 
   //#region specificClickHandlers
   const handleNumberClicked = (value: string) => {
-    if (metadata.operatorClicked) {
+    if (metadata.equalClicked) {
+      handleClearClicked();
+      setRelevantOperandTo(value, true);  
+    }
+    else if (metadata.operatorClicked) {
       setRelevantOperandTo(value);
       batch(() => {
         dispatch(setOperatorClicked(false));
@@ -70,6 +82,7 @@ export const useEventHandler = () => {
   const handleOperatorClicked = (value: string) => {
     batch(() => {
       dispatch(setOperator(value));
+      dispatch(addToHistory(calculatorData.left + value));
       dispatch(setOperatorClicked(true));
       dispatch(setIsLeft(false));
     });
@@ -90,13 +103,18 @@ export const useEventHandler = () => {
     }
   };
 
-  const handleEqualClicked = () =>
-    batch(() => {
+  const handleEqualClicked = () => {
       dispatch(setEqualClicked(true));
+      if (!history.endsWith("=")) {
+        dispatch(addToHistory(history + calculatorData.right + " ="));
+      }
+      // Consecutive equal button clicks
+      else {
+        dispatch(addToHistory(calculatorData.display+ calculatorData.operator + calculatorData.right + " ="));
+      }
       dispatch(
-        setLeft(calculateResult(Number(calculatorData.left), Number(calculatorData.right)).toString())
-      );
-    });
+        setLeft(calculateResult(Number(calculatorData.left), Number(calculatorData.right)).toString()));
+    };
 
   const handleMemoryClicked = (value: string) => {
     switch (value) {
