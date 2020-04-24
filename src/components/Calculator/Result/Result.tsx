@@ -1,3 +1,4 @@
+import "./Result.css"
 import { Form, FormInput } from "semantic-ui-react";
 import React, { FC } from "react";
 
@@ -7,7 +8,9 @@ const Result: FC<ResultType> = ({ display }) => {
   return (
     <Form>
       <FormInput fluid readOnly data-testid="result-label">
-        {display}
+        <div className="result">
+          {display}
+        </div>
       </FormInput>
     </Form>
   );

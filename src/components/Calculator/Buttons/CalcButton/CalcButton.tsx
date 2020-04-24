@@ -16,7 +16,7 @@ const CalcButton: FC<CalcButtonType> = ({
     size={size}
     active={false}
     style={style}
-    color={color}
+    color={value !== "" ? color : "grey"}
     onClick={onClick}
     content={value}
     data-testid={value}
