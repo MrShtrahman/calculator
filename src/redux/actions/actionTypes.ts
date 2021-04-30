@@ -24,3 +24,7 @@ export const auth = {
   SET_IS_AUTH: "SET_IS_AUTH",
   SET_NAME: "SET_NAME",
 };
+
+export const settings = {
+  IS_DARK_MODE: "IS_DARK_MODE"
+}
